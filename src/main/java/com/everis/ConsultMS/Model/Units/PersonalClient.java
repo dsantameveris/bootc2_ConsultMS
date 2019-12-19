@@ -1,4 +1,4 @@
-package com.everis.ConsultMS.Model;
+package com.everis.ConsultMS.Model.Units;
 
 import org.springframework.data.mongodb.core.mapping.Document;
 
