@@ -7,20 +7,16 @@ import lombok.Data;
 @Data
 @Document
 public class PClientProducts
-{
-    private String id;
-    
-    private String dni;
-
-    private String name;
+{    
+    private PersonalClient client;
 
     private SavingAccount savingaccount;
 
-    private CheckAccount checkaccount;
+    // private CheckAccount checkaccount;
 
-    private String termaccount;
+    // private TermAccount termaccount;
 
-    private String creditcard;
+    // private CreditCard creditcard;
 
-    private String loan;
+    // private Loan loan;
 }
