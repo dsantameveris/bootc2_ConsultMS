@@ -2,6 +2,7 @@ package com.everis.ConsultMS.Model;
 
 import javax.validation.constraints.NotBlank;
 
+import com.everis.ConsultMS.Model.Units.CheckAccountDTO;
 import com.everis.ConsultMS.Model.Units.CreditCardDTO;
 import com.everis.ConsultMS.Model.Units.PersonalClient;
 import com.everis.ConsultMS.Model.Units.SavingAccountDTO;
@@ -21,7 +22,10 @@ public class PClientProducts
     private SavingAccountDTO savingaccount;
 
     @NotBlank
-    private CreditCardDTO checkaccount;
+    private CreditCardDTO creditcard;
+
+    @NotBlank
+    private CheckAccountDTO checkaccount;
 
 
     public PClientProducts(PersonalClient pclient)
@@ -36,8 +40,6 @@ public class PClientProducts
     // }
 
     //private SavingAccount savingaccount;
-
-    // private CheckAccount checkaccount;
 
     // private TermAccount termaccount;
 

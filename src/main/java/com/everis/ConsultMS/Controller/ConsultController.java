@@ -1,6 +1,7 @@
 package com.everis.ConsultMS.Controller;
 
 import com.everis.ConsultMS.Model.PClientProducts;
+import com.everis.ConsultMS.Model.Units.CheckAccountDTO;
 import com.everis.ConsultMS.Model.Units.CreditCardDTO;
 import com.everis.ConsultMS.Model.Units.PersonalClient;
 import com.everis.ConsultMS.Model.Units.SavingAccountDTO;
@@ -28,30 +29,43 @@ public class ConsultController {
                         {
                             return new PClientProducts(pclient);
                         })
-                        .flatMap(c -> 
+                        .flatMap(pclient -> 
                         {
                             return WebClient.create("http://localhost:8013/savingacc/ownerdto/")
                                         .get()
-                                        .uri("/{dni}", c.getPclient().getDni())
+                                        .uri("/{dni}", pclient.getPclient().getDni())
                                         .retrieve()
                                         .bodyToMono(SavingAccountDTO.class)
                                         .map(sa -> 
                                         {
-                                            c.setSavingaccount(sa);
-                                            return c;
+                                            pclient.setSavingaccount(sa);
+                                            return pclient;
                                         });                    
                         })
-                        .flatMap(c -> 
+                        .flatMap(pclient -> 
                         {
                             return WebClient.create("http://localhost:8017/creditcard/ownerdto/")
                                         .get()
-                                        .uri("/{dni}", c.getPclient().getDni())
+                                        .uri("/{dni}", pclient.getPclient().getDni())
                                         .retrieve()
                                         .bodyToMono(CreditCardDTO.class)
                                         .map(cc -> 
                                         {
-                                            c.setCheckaccount(cc);
-                                            return c;
+                                            pclient.setCreditcard(cc);
+                                            return pclient;
+                                        });  
+                        })
+                        .flatMap(pclient -> 
+                        {
+                            return WebClient.create("http://localhost:8014/checkacc/ownerdto/")
+                                        .get()
+                                        .uri("/{dni}", pclient.getPclient().getDni())
+                                        .retrieve()
+                                        .bodyToMono(CheckAccountDTO.class)
+                                        .map(ca -> 
+                                        {
+                                            pclient.setCheckaccount(ca);
+                                            return pclient;
                                         });  
                         });     
     }
