@@ -54,20 +54,20 @@ public class ConsultController {
                                             pclient.setCreditcard(cc);
                                             return pclient;
                                         });  
-                        })
-                        .flatMap(pclient -> 
-                        {
-                            return WebClient.create("http://localhost:8014/checkacc/ownerdto/")
-                                        .get()
-                                        .uri("/{dni}", pclient.getPclient().getDni())
-                                        .retrieve()
-                                        .bodyToMono(CheckAccountDTO.class)
-                                        .map(ca -> 
-                                        {
-                                            pclient.setCheckaccount(ca);
-                                            return pclient;
-                                        });  
-                        });     
+                        });
+                        // .flatMap(pclient -> 
+                        // {
+                        //     return WebClient.create("http://localhost:8014/checkacc/ownerdto/")
+                        //                 .get()
+                        //                 .uri("/{dni}", pclient.getPclient().getDni())
+                        //                 .retrieve()
+                        //                 .bodyToMono(CheckAccountDTO.class)
+                        //                 .map(ca -> 
+                        //                 {
+                        //                     pclient.setCheckaccount(ca);
+                        //                     return pclient;
+                        //                 });  
+                        // });     
     }
 
     // @GetMapping("/testing/{dni}")
